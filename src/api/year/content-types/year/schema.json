@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "years",
+  "info": {
+    "singularName": "year",
+    "pluralName": "years",
+    "displayName": "Year"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Year": {
+      "type": "string"
+    },
+    "thumbnail1": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "thumbnail2": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "thumnail3": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "photographies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::photography.photography",
+      "mappedBy": "year"
+    },
+    "Description": {
+      "type": "text",
+      "required": true
+    }
+  }
+}
