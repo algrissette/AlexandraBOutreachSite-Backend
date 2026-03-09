@@ -1,17 +1,19 @@
-import path from 'path';
+export default ({ env }) => {
+  const dbUrl = new URL(env("MYSQL_PUBLIC_URL"));
 
-export default ({ env }) => ({
-  connection: {
-    client: 'mysql', // force MySQL
+  return {
     connection: {
-      host: env('MYSQLHOST', 'mysql.railway.internal'),
-      port: env.int('MYSQLPORT', 3306),
-      database: env('MYSQLDATABASE', 'railway'),
-      user: env('MYSQLUSER', 'root'),
-      password: env('MYSQLPASSWORD', 'YwYfVDRQxYbyvJXTRomjtMefslApGSUm'),
-      ssl: { rejectUnauthorized: false }, // required for Railway internal connection
+      client: "mysql",
+      connection: {
+        host: dbUrl.hostname,
+        port: dbUrl.port,
+        database: dbUrl.pathname.replace("/", ""),
+        user: dbUrl.username,
+        password: dbUrl.password,
+        ssl: { rejectUnauthorized: false },
+      },
+      pool: { min: 2, max: 10 },
+      acquireConnectionTimeout: 60000,
     },
-    pool: { min: 2, max: 10 },
-    acquireConnectionTimeout: 60000,
-  },
-});
+  };
+};
